@@ -11,10 +11,12 @@ Setup
 
 Add your RPC URL to config.json. (Go to https://helius.dev if you don't have one)<br><br>
 Add your target wallet address to config.json (use the test ones below if you don't have)<br><br>
-Edit your block and transaction limit<br><br>
+Edit your block and transaction limit: <br>
 
-Block Limit - how many blocks after the target wallet you wanna check until<br><br>
-Transaction Limit - amount of transcations you want to check in that block
+
+	Block Limit - how many blocks after the target wallet you wanna check until
+	Transaction Limit - amount of transcations you want to check in that block
+
 
 <details open>
 <summary>Test Wallets</summary>

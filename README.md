@@ -9,9 +9,9 @@
 Setup
 </h1>
 
-`Add your RPC url to config.json.`<br><br>
-`Edit the block and transcation threshold (line 145, 146).`<br><br>
-`Enter the contested wallet address (line 132) or manually edit the wallet address, here are some contested wallets below: `<br><br>
+Add your RPC URL to config.json. (Go to https://helius.dev if you don't have one)<br><br>
+Edit the block and transcation threshold (line 145, 146).<br><br>
+Enter the contested wallet address (line 132) or manually edit the wallet address, here are some contested wallets below:<br><br>
 
 <details open>
 <summary>Test Wallets</summary>

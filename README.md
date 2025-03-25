@@ -9,7 +9,7 @@
 Setup
 </h1>
 
-Add your RPC URL to config.json. (Go to https://helius.dev if you don't have one)<br><br>
+Add your RPC URL to config.json. (Go to https://helius.dev if you don't have one, $50 Developer plan recommended)<br><br>
 Add your target wallet address to config.json (use the test ones below if you don't have)<br><br>
 Edit your block and transaction limit: <br>
 

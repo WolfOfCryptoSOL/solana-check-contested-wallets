@@ -21,7 +21,7 @@ botAccounts = {
     "minTcHYRLVPubRK8nt6sqe2ZpWrGDLQoNLipDJCGocY": "Mintech",
     "6m2CDdhRgxpH4WjvdzxAYbGxwdGUz5MziiL5jek2kBma": "OKX",
     "BANANAjs7FJiPQqJTGFzkZJndT9o7UmKiYYGaJz6frGu": "Banana Gun",
-    "DFJtKLQa1PFfWwdAfhgmwqsLgcAtj486mxsatPrGVA2s": "StarkDex Bot",
+    "9QT9pBnnvrRXdEdkYhp5KrB9SqgTopmmVNunUm726DbJ": "StarkDex Bot",
     "97VmzkjX9w8gMFS2RnHTSjtMEDbifGXBq9pgosFdFnM": "TradeWiz",
     "CABAL69DYBisjkdHxwVktMy2TPHYVYc2D3UDQQ2DLwKM": "Cabal Bot",
     "b1oodtXw4tigt8MoRcRrWUGCW31WeFUtFMsFgwQpSQ9": "Blood",
@@ -79,6 +79,7 @@ feeWallets = {
     "4iUgjMT8q2hNZnLuhpqZ1QtiV8deFPy2ajvvjEpKKgsS": "0slot",
     "3Rz8uD83QsU8wKvZbgWAPvCNDU6Fy8TSZTMcPm3RB6zt": "0slot",
     "FCjUJZ1qozm1e8romw216qyfQMaaWKxWsuySnumVCCNe": "0slot",
+    "Cix2bHfqPcKcM233mzxbLk14kSggUUiz2A87fJtGivXr": "0slot",
 }
 
 
@@ -113,7 +114,7 @@ class CopyWalletFinder:
     
     def getLastBuy(self, walletAddress: str):
         retries = 3
-        url = f"https://gmgn.ai/api/v1/wallet_activity/sol?type=buy&wallet={walletAddress}&limit=10&cost=10"
+        url = f"https://gmgn.mobi/api/v1/wallet_activity/sol?type=buy&wallet={walletAddress}&limit=10&cost=10"
         for attempt in range(retries):
             self.randomiseRequest()
             try:

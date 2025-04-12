@@ -160,6 +160,19 @@ class CopyWalletFinder:
             'user-agent': self.user_agent
         }
 
+    def getPNL(self, contractAddress: str, walletAddress: str):
+        url = f"https://gmgn.ai/defi/quotation/v1/smartmoney/sol/walletstat/{walletAddress}?token_address={contractAddress}&period=1d"
+        for _ in range(3):
+            self.randomiseRequest()
+            try:
+                tokenData = self.session.get(url, headers=self.headers).json()['data']
+                profitUsd = f"${tokenData.get('total_profit', '?'):,.2f}"
+                profitPercent = f"{tokenData.get('realized_profit_pnl', '?'):,.2f}%"
+                return profitUsd, profitPercent
+            except Exception as e:
+                print(f"Attempt failed for wallet {walletAddress}: {e}")
+        return None, None
+
     def getLastBuy(self, walletAddress: str):
         url = f"https://gmgn.mobi/api/v1/wallet_activity/sol?type=buy&wallet={walletAddress}&limit=10&cost=10"
         for _ in range(3):
@@ -284,13 +297,24 @@ def main():
 
     _, mainBlock, potentialTraders = finder.getPotentialCopyTraders(mainBlock, walletAddress, contractAddress, blockLimit)
     rows = []
-    headers = ["Trader", "Signature", "Block Delay", "Bot Used", "Tx Processor/Fee Wallet", "Fee Paid", "SOL Bought"]
+    headers = ["Trader", "Signature", "Block Delay", "Bot Used", "Tx Processor/Fee Wallet", "Fee Paid", "SOL Bought", "Profit/PNL"]
     rows.append(headers)
 
     for trader, txSig, contestantBlock in potentialTraders:
         result = processTransaction(finder, txSig, mainBlock, trader)
         if not result:
             continue
+
+        # Get PNL data for the trader wallet using contractAddress and trader address.
+        profitUsd, profitPercent = finder.getPNL(contractAddress, trader)
+        if profitUsd and profitPercent:
+            profitPNL = f"{profitUsd} ({profitPercent})"
+        else:
+            profitPNL = "N/A"
+
+        # Update result to include profit info.
+        result["profitPNL"] = profitPNL
+
         outputData[walletAddress]["potentialCopyTraders"][trader] = result
         feeWalletsStr = ", ".join(result["feePaidTo"].keys())
         rows.append([
@@ -300,7 +324,8 @@ def main():
             result["botUsed"],
             feeWalletsStr,
             f"{result['feePaid']} SOL",
-            f"{result['solAmountBought']:.8f} SOL"
+            f"{result['solAmountBought']:.8f} SOL",
+            profitPNL
         ])
 
     filename = f"results/copytraders_{shorten(walletAddress)}_{shorten(contractAddress)}.json"
@@ -310,7 +335,7 @@ def main():
     csvFilename = f"results/copytraders_{shorten(walletAddress)}_{shorten(contractAddress)}.csv"
     with open(csvFilename, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(["WalletAddress", "Trader", "TxSignature", "BlockDelay", "BotUsed", "FeePaidTo", "FeePaid", "SOL Bought"])
+        writer.writerow(["WalletAddress", "Trader", "TxSignature", "BlockDelay", "BotUsed", "FeePaidTo", "FeePaid", "SOL Bought", "Profit/PNL"])
         for trader, data in outputData[walletAddress]["potentialCopyTraders"].items():
             writer.writerow([
                 walletAddress,
@@ -320,7 +345,8 @@ def main():
                 data["botUsed"],
                 json.dumps(data["feePaidTo"]),
                 data["feePaid"],
-                data["solAmountBought"]
+                data["solAmountBought"],
+                data["profitPNL"]
             ])
 
     colWidths = [max(len(str(row[i])) for row in rows) for i in range(len(headers))]

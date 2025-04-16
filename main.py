@@ -305,14 +305,12 @@ def main():
         if not result:
             continue
 
-        # Get PNL data for the trader wallet using contractAddress and trader address.
         profitUsd, profitPercent = finder.getPNL(contractAddress, trader)
         if profitUsd and profitPercent:
             profitPNL = f"{profitUsd} ({profitPercent})"
         else:
             profitPNL = "N/A"
 
-        # Update result to include profit info.
         result["profitPNL"] = profitPNL
 
         outputData[walletAddress]["potentialCopyTraders"][trader] = result

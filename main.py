@@ -43,6 +43,7 @@ def getSolAmountBought(txData: dict) -> float:
     return solAmount
 
 botAccounts = {
+    "A1akazamWUPTYbXJyGPXDi27K8RqVXNAZ4g2KzYmw4hq": "Sharp3.0",
     "LUNARCc6FmA3hzPrwmXW3z6RNX1MYXhKS4opYoqCm9P": "Lunar",
     "vs1ongEMwP15z6RKykbUbWwAf8WXFKNTLkfEr5JN6K7": "VisionAIO",
     "BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW": "Photon",
@@ -59,6 +60,15 @@ botAccounts = {
     "Axiom3a2w1UbMt2SMgqSvRiuJFTPusDhwKamNgPTeNQ9": "Axiom",
     "PEPPER3dYQpY2TTqHp3XinzRu519X7GswmVNb5tqK8L": "Peppermints",
     "King7ki4SKMBPb3iupnQwTyjsq294jaXsgLmJo8cb7T": "King Bot (??)",
+    "NA365bsPdvZ8sP58qJ5QFg7eXygCe8aPRRxR9oeMbR5": "Imported_1",
+"6m2CDdhRgxpH4WjvdzxAYbGxwdGUz5MziiL5jek2kBma": "Imported_2",
+"AxiomfHaWDemCFBLBayqnEnNwE6b7B2Qz3UmzMpgbMG6": "Imported_3",
+"AxiomxSitiyXyPjKgJ9XSrdhsydtZsskZTEDam3PxKcC": "Imported_4",
+"3s1rAymURnacreXreMy718GfqW6kygQsLNka1xDyW8pC": "Imported_5",
+"BoobsBSMpFRBA91sNwKLYShRRQPH5GjoCH4NhLUt4yRo": "Imported_6",
+"ArbiT5roZVrSvdXE4AWiBGkTMZrU1hWV7i7yuAhcJZBW": "Imported_7",
+"smakEnVFKFy2fZG25bESNBgWuR6ZRnW1697qFZk4RTF": "Imported_8",
+"BSfD6SHZigAfDWSjzD5Q41jw8LmKwtmjskPH9XW1mrRW": "Imported_9"
 }
 
 feeWallets = {
